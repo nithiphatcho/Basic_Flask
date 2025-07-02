@@ -1,0 +1,31 @@
+{% import  "bootstrap/wtf.html" as wtf %}
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container my-2">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+        {% endfor %}
+        <h1>ยินดีต้อนรับเข้าสู่หน้าแรก</h1>
+        {{wtf.quick_form(form)}}
+        <hr>
+            {% if session['name'] %}
+                ชื่อของคุณคือ <strong>{{session['name']}}</strong><br>
+                ยอมรับบริการหรือไม่ ? <strong>{{session['isAccept']}}</strong><br>
+                เพศ <strong>{{session['gender']}}</strong><br>
+                ทักษะความสามารถ <strong>{{session['skill']}}</strong><br>
+                ที่อยู่ <strong>{{session['address']}}</strong><br>
+            {% else %}
+                ไม่พบข้อมูล
+            {% endif %}
+    </div>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/admin">Admin</a></li>
+    </ul>
+{% endblock %}
